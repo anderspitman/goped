@@ -32,6 +32,11 @@ func Parse(pedStr string) (*Pedigree, error) {
         scanner := bufio.NewScanner(strings.NewReader(pedStr))
         for scanner.Scan() {
                 line := scanner.Text()
+
+                if strings.HasPrefix(line, "#") {
+                        continue
+                }
+
                 indi, err := parseLine(line)
                 if err != nil {
                         return nil, errors.New("Error parsing row")
